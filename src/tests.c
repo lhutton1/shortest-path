@@ -1,6 +1,9 @@
-#include "treeStructure.h"
-#include "buildTree.h"
-#include "writeTree.h"
+#include "../inc/treeStructure.h"
+#include "../inc/buildTree.h"
+#include "../inc/writeTree.h"
+#include "../inc/destroyTree.h"
+#include "../inc/growTree.h"
+
 
 void task1() {
 
@@ -16,4 +19,9 @@ void task3() {
 
 void task4() {
 
+}
+
+void main() {
+
+    return 0;
 }

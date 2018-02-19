@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
-#include "treeStructure.h"
-#include "buildTree.h"
+#include "../inc/treeStructure.h"
+#include "../inc/buildTree.h"
 
 
 // Make a node at given location (x,y) and level
@@ -32,21 +32,4 @@ void makeChildren(Node *parent) {
     parent->child[1] = makeNode(x + hChild, y, level + 1);
     parent->child[2] = makeNode(x + hChild, y + hChild, level + 1);
     parent->child[3] = makeNode(x, y + hChild, level + 1);
-}
-
-
-// Destroy whole tree starting from head
-void destroyTree(Node *head) {
-    destroyNode(head);
-}
-
-
-// Destroy node and all sub nodes recursively
-void destroyNode(Node *node) {
-    for (int i = 0; i < 4; ++i) {
-        if (node->child[i] != NULL)
-            destroyNode(node->child[i]);
-    }
-
-    free(node);
 }

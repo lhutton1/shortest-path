@@ -1,6 +1,6 @@
-#include "treeStructure.h"
-#include "buildTree.h"
-#include "writeTree.h"
+#include "../inc/treeStructure.h"
+#include "../inc/buildTree.h"
+#include "../inc/writeTree.h"
 
 
 int main(int argc, char **argv) {

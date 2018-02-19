@@ -1,33 +1,33 @@
 # code details
 
-EXE_DIR = .
-EXE = $(EXE_DIR)basicQuadtree
+EXE_DIR = /src/
+EXE = $(EXE_DIR)main
 
-SRC= basicQuadtree.c
+SRC= /src/main.c
+
+DEPS = buildTree.h destroyTree.h growTree.h treeStructure.h writeTree.h
+
 
 # generic build details
 
-CC=      cc
-COPT=    -g
-CFLAGS= -lm
+CC=      gcc
+CFLAGS=  -g -I../include
+LIBS=    -lm
+OBJ=     main.o buildTree.o destroyTree.o growTree.o writeTree.o
 
-# compile to  object code
-
-OBJ= $(SRC:.c=.o)
-
-.c.o:
-	$(CC) $(COPT) -c -o $@ $<
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
 # build executable
 
-$(EXE): $(OBJ)
-	$(CC) $(OBJ) $(CFLAGS) -o $(EXE)
+main: $(OBJ)
+	$(CC) $(LIBS) -o main $^ $(CFLAGS)
+
+
 
 # clean up compilation
 
+.PHONY: clean
+
 clean:
 	rm -f $(OBJ) $(EXE)
-
-# dependencies
-
-basicQuadtree.o:  basicQuadtree.c

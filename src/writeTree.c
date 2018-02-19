@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "treeStructure.h"
-#include "writeTree.h"
+#include "../inc/treeStructure.h"
+#include "../inc/writeTree.h"
 
 
 // Write out the tree to file 'quad.out'

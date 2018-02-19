@@ -1,4 +1,3 @@
-
 struct qnode {
   int level;
   double xy[2];
