@@ -1,33 +1,31 @@
-# code details
-
-EXE_DIR = /src/
-EXE = $(EXE_DIR)main
-
-SRC= /src/main.c
-
-DEPS = buildTree.h destroyTree.h growTree.h treeStructure.h writeTree.h
+#rm -f $(OBJ) $(EXE)
 
 
-# generic build details
 
-CC=      gcc
-CFLAGS=  -g -I../include
-LIBS=    -lm
-OBJ=     main.o buildTree.o destroyTree.o growTree.o writeTree.o
+IDIR=include
+CC=gcc
+CFLAGS=-I$(IDIR)
 
-%.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+ODIR=src
+LDIR=lib
 
-# build executable
+LIBS=-lm
+
+_DEPS=buildTree.h destroyTree.h growTree.h treeStructure.h writeTree.h tests.h
+DEPS=$(patsubst %,$(IDIR)/%,$(_DEPS))
+
+_OBJ=main.o buildTree.o destroyTree.o growTree.o writeTree.o tests.o
+OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
+
+_OUT=out
+
+$(ODIR)/%.o: %.c $(DEPS)
+	$(CC) -c $< -o $@ $(CFLAGS)
 
 main: $(OBJ)
-	$(CC) $(LIBS) -o main $^ $(CFLAGS)
-
-
-
-# clean up compilation
+	gcc -o $(_OUT)/$@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean
 
 clean:
-	rm -f $(OBJ) $(EXE)
+	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~

@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
-#include "../inc/treeStructure.h"
-#include "../inc/buildTree.h"
+#include "../include/treeStructure.h"
+#include "../include/buildTree.h"
 
 
 // Make a node at given location (x,y) and level

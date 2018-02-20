@@ -1,27 +1,19 @@
-#include "../inc/treeStructure.h"
-#include "../inc/buildTree.h"
-#include "../inc/writeTree.h"
+#include "../include/treeStructure.h"
+#include "../include/buildTree.h"
+#include "../include/writeTree.h"
+#include "../include/tests.h"
 
 
-int main(int argc, char **argv) {
-
-    Node *head;
-
-    // make the head node
-    head = makeNode(0.0, 0.0, 0);
-
-    // make a tree
-    makeChildren(head);
-    makeChildren(head->child[1]);
-    makeChildren(head->child[2]);
-    makeChildren(head->child[2]->child[3]);
-    makeChildren(head->child[1]->child[2]);
-
-    // print the tree for Gnuplot
-    writeTree(head);
-
-    // destroy tree and clear memory
-    destroyTree(head);
-
-    return 0;
+int main(int argc, char *argv[]) {
+    printf("%d %c\n", argc, *argv[1]);
+    if (argc == 2 && *argv[1] == '1') {
+        printf("running test 1\n");
+        task1();
+    } else if (argc == 2 && *argv[1] == '2') {
+        printf("running test 2\n");
+    } else if (argc == 2 && *argv[1] == '3') {
+        printf("running test 3\n");
+    } else if (argc == 2 && *argv[1] == '4') {
+        printf("running test 4\n");
+    }
 }
