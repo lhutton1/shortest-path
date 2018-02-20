@@ -33,7 +33,9 @@ void task2() {
     makeChildren(head->child[1]->child[0]);
     makeChildren(head->child[1]->child[1]);
 
-
+    growTree(head);
+    writeTree(head);
+    destroyTree(head);
 }
 
 void task3() {

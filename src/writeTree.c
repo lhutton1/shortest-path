@@ -7,7 +7,7 @@
 
 // Write out the tree to file 'quad.out'
 void writeTree(Node *head) {
-    FILE *fp = fopen("quad.out", "w");
+    FILE *fp = fopen("out/quad.out", "w");
     writeNode(fp, head);
     fclose(fp);
 }
