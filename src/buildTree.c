@@ -1,3 +1,6 @@
+#include <math.h>
+#include <stdlib.h>
+#include "../include/treeStructure.h"
 #include "../include/buildTree.h"
 
 

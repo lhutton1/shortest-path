@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "../include/treeStructure.h"
+#include "../include/buildTree.h"
 #include "../include/growTree.h"
 
 // Grow tree starting from head

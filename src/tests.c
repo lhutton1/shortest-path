@@ -1,3 +1,8 @@
+#include "../include/treeStructure.h"
+#include "../include/buildTree.h"
+#include "../include/writeTree.h"
+#include "../include/destroyTree.h"
+#include "../include/growTree.h"
 #include "../include/tests.h"
 
 
