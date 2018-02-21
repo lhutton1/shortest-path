@@ -1,7 +1,3 @@
-#rm -f $(OBJ) $(EXE)
-
-
-
 IDIR=include
 CC=gcc
 CFLAGS=-I$(IDIR)

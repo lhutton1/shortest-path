@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include "../include/treeStructure.h"
 #include "../include/writeTree.h"
 
 
