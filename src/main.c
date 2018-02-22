@@ -1,6 +1,7 @@
 #include "../include/treeStructure.h"
 #include "../include/buildTree.h"
 #include "../include/writeTree.h"
+#include "../include/valueTree.h"
 #include "../include/tests.h"
 
 
@@ -15,5 +16,6 @@ int main(int argc, char *argv[]) {
         printf("running test 3...\n");
     } else if (argc == 2 && *argv[1] == '4') {
         printf("running test 4...\n");
+        task4();
     }
 }

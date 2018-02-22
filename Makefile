@@ -7,10 +7,10 @@ LDIR=lib
 
 LIBS=-lm
 
-_DEPS=buildTree.h destroyTree.h growTree.h treeStructure.h writeTree.h tests.h
+_DEPS=buildTree.h destroyTree.h growTree.h treeStructure.h writeTree.h tests.h valueTree.c
 DEPS=$(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ=main.o buildTree.o destroyTree.o growTree.o writeTree.o tests.o
+_OBJ=main.o buildTree.o destroyTree.o growTree.o writeTree.o tests.o valueTree.o
 OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
 
 _OUT=out

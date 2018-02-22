@@ -1,10 +1,13 @@
+#include <stdio.h>
 #include "../include/treeStructure.h"
 #include "../include/buildTree.h"
 #include "../include/writeTree.h"
 #include "../include/destroyTree.h"
 #include "../include/growTree.h"
+#include "../include/valueTree.h"
 #include "../include/tests.h"
 
+const int MAX_LEVEL = 7;
 
 void task1() {
     Node *head;
@@ -15,9 +18,6 @@ void task1() {
     makeChildren(head->child[0]);
     makeChildren(head->child[1]);
     makeChildren(head->child[3]);
-    makeChildren(head->child[1]->child[1]);
-    makeChildren(head->child[3]->child[2]);
-    makeChildren(head->child[3]->child[3]);
 
     destroyTree(head);
     //writeTree(head);
@@ -30,9 +30,10 @@ void task2() {
     //Tree structure
     makeChildren(head);
     makeChildren(head->child[0]);
-    makeChildren(head->child[1]);
     makeChildren(head->child[2]);
-    makeChildren(head->child[3]);
+    makeChildren(head->child[0]->child[1]);
+    makeChildren(head->child[2]->child[0]);
+    makeChildren(head->child[2]->child[3]);
 
     growTree(head);
     writeTree(head);
@@ -40,9 +41,38 @@ void task2() {
 }
 
 void task3() {
+    Node *head;
+    head = makeNode(0.0, 0.0, 0);
 
+    //Tree structure
+    makeChildren(head);
+    makeChildren(head->child[0]);
+    makeChildren(head->child[1]);
+    makeChildren(head->child[3]);
+    makeChildren(head->child[0]->child[0]);
+    makeChildren(head->child[0]->child[0]->child[0]);
+    makeChildren(head->child[0]->child[0]->child[0]->child[0]);
+    makeChildren(head->child[0]->child[0]->child[0]->child[0]->child[0]);
+    makeChildren(head->child[0]->child[0]->child[0]->child[0]->child[0]->child[0]);
+    makeChildren(head->child[0]->child[0]->child[0]->child[0]->child[0]->child[0]->child[0]);
+    makeChildren(head->child[0]->child[0]->child[0]->child[0]->child[0]->child[0]->child[0]->child[0]);
+
+    writeTree(head);
+    destroyTree(head);
 }
 
 void task4() {
+    Node *head;
+    head = makeNode(0.0, 0.0, 0);
 
+    makeChildren(head);
+    makeChildren(head->child[0]);
+    makeChildren(head->child[1]);
+    makeChildren(head->child[2]);
+    makeChildren(head->child[3]);
+
+    printf("running growtreeusingdata\n");
+    growTreeUsingData(head, 0.2, 1);
+    writeTree(head);
+    destroyTree(head);
 }

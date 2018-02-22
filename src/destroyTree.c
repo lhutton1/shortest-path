@@ -1,3 +1,6 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include "../include/treeStructure.h"
 #include "../include/destroyTree.h"
 
 
