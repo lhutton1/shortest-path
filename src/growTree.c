@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include "../include/treeStructure.h"
 #include "../include/buildTree.h"
@@ -6,7 +5,6 @@
 
 // Grow tree starting from head
 void growTree(Node *head) {
-    printf("Growing tree\n");
     growNode(head);
 }
 

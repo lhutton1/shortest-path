@@ -1,12 +1,10 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include "../include/treeStructure.h"
 #include "../include/destroyTree.h"
 
 
 // Destroy whole tree starting from head
 void destroyTree(Node *head) {
-    printf("Destroying tree\n");
     destroyNode(head);
 }
 

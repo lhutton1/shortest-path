@@ -1,8 +1,6 @@
-
 #include <math.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include "../include/treeStructure.h"
 #include "../include/buildTree.h"
 #include  "../include/valueTree.h"
@@ -63,10 +61,13 @@ bool indicator(Node *node, double tolerance, int choice) {
         return false;
 }
 
+//Global variable to keep track of the number of false results that have occurred
 int noFalseResults;
 
+// Visit leaf nodes and determine whether child nodes need adding
 void visitLeafNodes(Node *node, double tolerance, int choice) {
     if (node->child[0] == NULL) {
+        // Indicator returns false...
         if (!indicator(node, tolerance, choice)) {
             noFalseResults++;
             makeChildren(node);
@@ -77,6 +78,7 @@ void visitLeafNodes(Node *node, double tolerance, int choice) {
     }
 }
 
+// Grow the tree using the predefined functions
 void growTreeUsingData(Node *head, double tolerence, int choice) {
     do {
         noFalseResults = 0;
