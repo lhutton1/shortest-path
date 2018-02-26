@@ -63,13 +63,13 @@ bool indicator(Node *node, double tolerance, int choice) {
         return false;
 }
 
-int noFalseResults = 1;
+int noFalseResults;
 
 void visitLeafNodes(Node *node, double tolerance, int choice) {
     if (node->child[0] == NULL) {
         if (!indicator(node, tolerance, choice)) {
-            makeChildren(node);
             noFalseResults++;
+            makeChildren(node);
         }
     } else {
         for (int i = 0; i < 4; ++i)
@@ -78,10 +78,10 @@ void visitLeafNodes(Node *node, double tolerance, int choice) {
 }
 
 void growTreeUsingData(Node *head, double tolerence, int choice) {
-    while (noFalseResults != 0) {
+    do {
         noFalseResults = 0;
         visitLeafNodes(head, tolerence, choice);
-    }
+    } while (noFalseResults != 0);
 }
 
 

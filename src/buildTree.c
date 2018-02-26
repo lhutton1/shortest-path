@@ -32,10 +32,8 @@ void makeChildren(Node *parent) {
     double hChild = pow(2.0, -(level + 1));
 
     // Limit child node level creation to MAX_LEVEL
-    if (level > MAX_LEVEL) {
-        printf("Cannot create node, max level reached\n");
+    if (level + 1 > MAX_LEVEL)
         return;
-    }
 
     parent->child[0] = makeNode(x, y, level + 1);
     parent->child[1] = makeNode(x + hChild, y, level + 1);

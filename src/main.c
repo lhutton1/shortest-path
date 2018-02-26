@@ -14,6 +14,7 @@ int main(int argc, char *argv[]) {
         task2();
     } else if (argc == 2 && *argv[1] == '3') {
         printf("running test 3...\n");
+        task3();
     } else if (argc == 2 && *argv[1] == '4') {
         printf("running test 4...\n");
         task4();
