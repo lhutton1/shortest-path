@@ -61,30 +61,27 @@ bool indicator(Node *node, double tolerance, int choice) {
         return false;
 }
 
-//Global variable to keep track of the number of false results that have occurred
-int noFalseResults;
-
 // Visit leaf nodes and determine whether child nodes need adding
-void visitLeafNodes(Node *node, double tolerance, int choice) {
+void visitLeafNodes(Node *node, double tolerance, int choice, int *falseResults) {
     if (node->child[0] == NULL) {
         // Indicator returns false...
         if (!indicator(node, tolerance, choice)) {
-            noFalseResults++;
+            (*falseResults)++;
             makeChildren(node);
         }
     } else {
         for (int i = 0; i < 4; ++i)
-            visitLeafNodes(node->child[i], tolerance, choice);
+            visitLeafNodes(node->child[i], tolerance, choice, falseResults);
     }
 }
 
 // Grow the tree using the predefined functions
 void growTreeUsingData(Node *head, double tolerence, int choice) {
+    // keep track of how many false results there are
+    int falseResults;
+
     do {
-        noFalseResults = 0;
-        visitLeafNodes(head, tolerence, choice);
-    } while (noFalseResults != 0);
+        falseResults = 0;
+        visitLeafNodes(head, tolerence, choice, &falseResults);
+    } while (falseResults != 0);
 }
-
-
-
