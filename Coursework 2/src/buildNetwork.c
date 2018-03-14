@@ -47,7 +47,8 @@ NetworkP createNetwork() {
 }
 
 
-// Destroy graph, freeing up all memory
+// Destroy graph, first removing adjacency nodes, then the adjacency array,
+// then the network itself freeing up all memory
 void destroyNetwork(NetworkP network) {
   if (network) {
     if (network->adjacencyListArray) {
@@ -79,5 +80,5 @@ void addNode(NetworkP network, int id, double x, double y) {
 }
 
 void addEdge(NetworkP network, int id, int source, int target, int weight) {
-  
+
 }
