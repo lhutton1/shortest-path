@@ -1,19 +1,29 @@
 #ifndef __NETWORKSTRUCTURE__
 #define __NETWORKSTRUCTURE__
 
-struct node {
-  int id;
-  double lat;
-  double lon;
+struct adjListNode {
+  int node;
+  double weight;
+  struct adjListNode *next;
 };
 
-typedef struct node Node;
+typedef struct adjListNode AdjListNode, *AdjListNodeP;
 
-struct edge {
+struct adjList {
+  int noMembers;
   int id;
-  int nodeid[2];
+  double x;
+  double y;
+  struct adjListNode *head;
 };
 
-typedef struct edge Edge;
+typedef struct adjList AdjList, *AdjListP;
+
+struct network {
+  int noNodes;
+  AdjListP adjacencyListArray;
+};
+
+typedef struct network Network, *NetworkP;
 
 #endif
