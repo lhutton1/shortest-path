@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "uthash.h"
 #include "buildNetwork.h"
 #include "networkStructure.h"
 
@@ -67,18 +68,21 @@ void destroyNetwork(NetworkP network) {
   }
 }
 
-
+AdjListP Nodes = NULL;
 // Add new node to the network by adding the relevent data
 void addNode(NetworkP network, int id, double x, double y) {
   AdjListP newNode = &network->adjacencyListArray[network->noNodes];
 
   newNode->id = id;
+  newNode->index = network->noNodes;
   newNode->x = x;
   newNode->y = y;
+
+  HASH_ADD_INT(Nodes, id, newNode);
 
   network->noNodes++;
 }
 
-void addEdge(NetworkP network, int id, int source, int target, int weight) {
-
-}
+//void addEdge(NetworkP network, int id, int source, int target, int weight) {
+    //HASH_FIND_INT();
+//}

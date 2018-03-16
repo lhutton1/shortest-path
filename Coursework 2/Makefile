@@ -7,7 +7,7 @@ LDIR=lib
 
 LIBS=-lm
 
-_DEPS=networkStructure.h readFile.h buildNetwork.h
+_DEPS=networkStructure.h readFile.h buildNetwork.h nodeHash.h
 DEPS=$(patsubst %,$(IDIR)/%,$(_DEPS))
 
 _OBJ=main.o readFile.o buildNetwork.o

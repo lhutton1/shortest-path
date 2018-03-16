@@ -7,6 +7,8 @@
 
 const int maxLineSize = 1000;
 
+int nodeIDCount = 0;
+
 void readFile(NetworkP network, char *filePath) {
     FILE *file;
 
@@ -35,6 +37,8 @@ void parseLine(NetworkP network, char *line) {
 
   if (strncmp(line, "<node ", 6) == 0) {
     sscanf(line, "%*s id=%d lat=%lf lon=%lf", &id, &lat, &lon);
+    nodeIDCount++;
+    printf("Node id: %d\n", id);
     addNode(network, id, lat, lon);
 
   } else if (strncmp(line, "<link ", 6) == 0) {
