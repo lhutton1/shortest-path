@@ -27,6 +27,7 @@ typedef struct adjList AdjList, *AdjListP;
 struct network {
   int noNodes;
   AdjListP adjacencyListArray;
+  AdjListP nodesHashTable;
 };
 
 typedef struct network Network, *NetworkP;

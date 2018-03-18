@@ -5,11 +5,11 @@
 #include "buildNetwork.h"
 #include "networkStructure.h"
 
-#define MAX_NODES 1000
+const int MAX_NODES = 4000;
 
-// Add node to the graph with specified id
+// Add new adjacency node to the graph with specified id
 AdjListNodeP createAdjacencyNode(int nodeNo) {
-  AdjListNodeP newNode = (AdjListNodeP) malloc(sizeof(AdjListNode));
+  AdjListNodeP newNode = (AdjListNodeP)malloc(sizeof(AdjListNode));
 
   if (!newNode) {
     printf("New node could not be created, unable to allocate needed memory");
@@ -22,7 +22,7 @@ AdjListNodeP createAdjacencyNode(int nodeNo) {
 }
 
 
-// Create new empty graph allocating nodes with no data
+// Create new empty graph allocating adjacency nodes with no data
 NetworkP createNetwork() {
   NetworkP newNetwork = (NetworkP)malloc(sizeof(Network));
 
@@ -33,6 +33,7 @@ NetworkP createNetwork() {
 
   newNetwork->noNodes = 0;
   newNetwork->adjacencyListArray = (AdjListP)malloc(MAX_NODES * sizeof(AdjList));
+  newNetwork->nodesHashTable = NULL;
 
   if (!newNetwork->adjacencyListArray) {
     printf("New adjacency lisy array could not be created, unable to allocate needed memory");
@@ -43,13 +44,13 @@ NetworkP createNetwork() {
     newNetwork->adjacencyListArray[x].head = NULL;
     newNetwork->adjacencyListArray[x].noMembers = 0;
   }
-
+  
   return newNetwork;
 }
 
 
 // Destroy graph, first removing adjacency nodes, then the adjacency array,
-// then the network itself freeing up all memory
+// then the network itself freeing up all memory.
 void destroyNetwork(NetworkP network) {
   if (network) {
     if (network->adjacencyListArray) {
@@ -68,21 +69,67 @@ void destroyNetwork(NetworkP network) {
   }
 }
 
-AdjListP Nodes = NULL;
-// Add new node to the network by adding the relevent data
+
+// Add new node to the network by adding the relevent data to a free
+// adjacency node. Also add this node to a hash table so it can
+// be quickly found.
 void addNode(NetworkP network, int id, double x, double y) {
+  if (network->noNodes > MAX_NODES) {
+    printf("Limit reached\n");
+    return;
+  }
+
   AdjListP newNode = &network->adjacencyListArray[network->noNodes];
 
+  //Initialse new nodes properties
+  newNode->noMembers = 0;
   newNode->id = id;
   newNode->index = network->noNodes;
   newNode->x = x;
   newNode->y = y;
+  newNode->head = NULL;
 
-  HASH_ADD_INT(Nodes, id, newNode);
+  HASH_ADD_INT(network->nodesHashTable, id, newNode);
 
   network->noNodes++;
 }
 
-//void addEdge(NetworkP network, int id, int source, int target, int weight) {
-    //HASH_FIND_INT();
-//}
+
+// Create a new adjacent node to add to adjacency list
+// node and initialze default values.
+AdjListNodeP createNode(AdjListP node, double weight) {
+    AdjListNodeP newAdjNode = (AdjListNodeP)malloc(sizeof(AdjListNode));
+
+    if(!newAdjNode)
+        printf("Unable to allocate memory for new node\n");
+
+    newAdjNode->node = node->id;
+    newAdjNode->weight = weight;
+    newAdjNode->next = NULL;
+
+    return newAdjNode;
+}
+
+
+// Add an edge to the network. Adds source node to the target in
+// adjacency array and visa versa, using a linked list to keep
+// track of changes.
+void addEdge(NetworkP network, int id, int source, int target, double weight) {
+  AdjListP sourceNode;
+  AdjListP targetNode;
+
+  HASH_FIND_INT(network->nodesHashTable, &source, sourceNode);
+  HASH_FIND_INT(network->nodesHashTable, &target, targetNode);
+
+  // Add node to adjacency list for source -> target (source | target, ...)
+  AdjListNodeP newAdjNode = createNode(targetNode, weight);
+  newAdjNode->next = network->adjacencyListArray[sourceNode->index].head;
+  network->adjacencyListArray[sourceNode->index].head = newAdjNode;
+  network->adjacencyListArray[sourceNode->index].noMembers++;
+
+  // Add node to adjacency list for target -> source (target | source, ...)
+  newAdjNode = createNode(sourceNode, weight);
+  newAdjNode->next = network->adjacencyListArray[targetNode->index].head;
+  network->adjacencyListArray[targetNode->index].head = newAdjNode;
+  network->adjacencyListArray[targetNode->index].noMembers++;
+}
