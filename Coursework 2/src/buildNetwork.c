@@ -44,7 +44,7 @@ NetworkP createNetwork() {
     newNetwork->adjacencyListArray[x].head = NULL;
     newNetwork->adjacencyListArray[x].noMembers = 0;
   }
-  
+
   return newNetwork;
 }
 

@@ -4,16 +4,15 @@
 #include "buildNetwork.h"
 #include "readFile.h"
 #include "networkStructure.h"
+#include "networkUtils.h"
 
 int main(void) {
   NetworkP n = createNetwork();
   readFile(n, "resources/Final_Map.map", true);   //pass1
   readFile(n, "resources/Final_Map.map", false);  //pass2
-  printf("%d\n", n->adjacencyListArray[0].id);
-  printf("%d\n", n->adjacencyListArray[0].noMembers);
-  printf("%lf\n", n->adjacencyListArray[0].head->weight);
-  printf("%lf\n", n->adjacencyListArray[0].head->next->weight);
-  printf("%lf\n", n->adjacencyListArray[0].head->next->next->weight);
+
+  deleteEdge(n, 1968799687, 1970536626);
+  printf("%lf\n", getEdgeWeight(n, 1968799687, 1970536626));
 
   destroyNetwork(n);
 
