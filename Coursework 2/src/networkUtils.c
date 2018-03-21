@@ -66,9 +66,3 @@ void deleteNode(NetworkP network, int nodeID) {
 
   HASH_DEL(network->nodesHashTable, node);
 }
-
-
-// Delete edge from given sourceID and targetID
-
-
-// Depth first search

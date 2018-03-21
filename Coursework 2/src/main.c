@@ -5,14 +5,31 @@
 #include "readFile.h"
 #include "networkStructure.h"
 #include "networkUtils.h"
+#include "binaryHeap.h"
+#include "priorityQueue.h"
 
 int main(void) {
   NetworkP n = createNetwork();
   readFile(n, "resources/Final_Map.map", true);   //pass1
   readFile(n, "resources/Final_Map.map", false);  //pass2
 
-  deleteEdge(n, 1968799687, 1970536626);
-  printf("%lf\n", getEdgeWeight(n, 1968799687, 1970536626));
+  PriorityQueue q = createPQueue();
+  queuePush(q, 2, NULL);
+  queuePush(q, 3, NULL);
+  queuePush(q, 6, NULL);
+  queuePush(q, 8, NULL);
+  queuePush(q, 9, NULL);
+  queuePush(q, 3, NULL);
+  queuePush(q, 1, NULL);
+  printQueue(q);
+  printf("%p\n", queuePop(q));
+  printf("%p\n", queuePop(q));
+  printf("%p\n", queuePop(q));
+  printf("%p\n", queuePop(q));
+  printf("%p\n", queuePop(q));
+  printf("%p\n", queuePop(q));
+  printQueue(q);
+  destroyPQueue(q);
 
   destroyNetwork(n);
 
