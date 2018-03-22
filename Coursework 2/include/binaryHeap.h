@@ -2,8 +2,8 @@
 #define __BINARYHEAP__
 
 struct networkTuple {
-  int priority;
-  AdjListNodeP data;
+  double priority;
+  AdjListP data;
 };
 
 typedef struct networkTuple NetworkTuple, *NetworkTupleP;

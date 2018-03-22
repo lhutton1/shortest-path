@@ -17,6 +17,8 @@ struct adjList {
   int index;
   double x;
   double y;
+  double distance;
+  struct adjList *parent;
   struct adjListNode *head;
 
   UT_hash_handle hh; /* Make structure hashable */

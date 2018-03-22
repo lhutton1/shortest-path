@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <math.h>
 
 #include "networkStructure.h"
 #include "binaryHeap.h"
@@ -116,7 +117,7 @@ void heapSwap(HeapP heap, int *x, int *y) {
 // Output heap - for debugging purposes
 void printHeap(HeapP heap) {
   for (int x = 0; x < heap->count; x++)
-    printf("(%d, %d), ", heap->data[x]->priority, x);
+    printf("(%lf, %d), ", heap->data[x]->priority, x);
 
   printf("\n");
 }

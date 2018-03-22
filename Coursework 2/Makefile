@@ -7,10 +7,10 @@ LDIR=lib
 
 LIBS=-lm
 
-_DEPS=networkStructure.h readFile.h buildNetwork.h nodeHash.h networkUtils.h binaryHeap.h priorityQueue.h
+_DEPS=networkStructure.h readFile.h buildNetwork.h nodeHash.h networkUtils.h binaryHeap.h priorityQueue.h djikstrasAlgorithm.h outFile.h
 DEPS=$(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ=main.o readFile.o buildNetwork.o networkUtils.o binaryHeap.o priorityQueue.o
+_OBJ=main.o readFile.o buildNetwork.o networkUtils.o binaryHeap.o priorityQueue.o djikstrasAlgorithm.o outFile.o
 OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
 
 _OUT=out
