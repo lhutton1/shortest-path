@@ -84,7 +84,6 @@ void addNode(NetworkP network, int id, double x, double y) {
   //Initialse new nodes properties
   newNode->noMembers = 0;
   newNode->id = id;
-  newNode->index = network->noNodes;
   newNode->x = x;
   newNode->y = y;
   newNode->head = NULL;
@@ -123,13 +122,13 @@ void addEdge(NetworkP network, int id, int source, int target, double weight) {
 
   // Add node to adjacency list for source -> target (source | target, ...)
   AdjListNodeP newAdjNode = createNode(targetNode, weight);
-  newAdjNode->next = network->adjacencyListArray[sourceNode->index].head;
-  network->adjacencyListArray[sourceNode->index].head = newAdjNode;
-  network->adjacencyListArray[sourceNode->index].noMembers++;
+  newAdjNode->next = sourceNode->head;
+  sourceNode->head = newAdjNode;
+  sourceNode->noMembers++;
 
   // Add node to adjacency list for target -> source (target | source, ...)
   newAdjNode = createNode(sourceNode, weight);
-  newAdjNode->next = network->adjacencyListArray[targetNode->index].head;
-  network->adjacencyListArray[targetNode->index].head = newAdjNode;
-  network->adjacencyListArray[targetNode->index].noMembers++;
+  newAdjNode->next = targetNode->head;
+  targetNode->head = newAdjNode;
+  targetNode->noMembers++;
 }

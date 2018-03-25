@@ -17,7 +17,7 @@ void writeEdge(FILE *fp, NetworkP network) {
   AdjListP adjacentNode;
   AdjListNodeP currentEdge;
   AdjListNodeP adjacentEdge;
-  bool color;
+  char *color;
 
   for (int i = 0; i < network->noNodes - 1; i++) {
     currentNode = &network->adjacencyListArray[i];
@@ -32,15 +32,13 @@ void writeEdge(FILE *fp, NetworkP network) {
 
 
 
-      if (currentNode->parent != NULL) {
-        printf("%p\n", currentNode->parent);
-        color = true;
-      }
+      if (currentNode->path)
+        color = "0xFF0000"; // red color for path lines
       else
-        color = false;
+        color = "0x0000FF"; // blue color for non path lines
 
-      fprintf(fp, "%g %g %d\n", currentNode->x, currentNode->y, color);
-      fprintf(fp, "%g %g %d\n", adjacentNode->x, adjacentNode->y, color);
+      fprintf(fp, "%g %g %s\n", currentNode->x, currentNode->y, color);
+      fprintf(fp, "%g %g %s\n", adjacentNode->x, adjacentNode->y, color);
       fprintf(fp, "\n");
 
       currentEdge = currentEdge->next;

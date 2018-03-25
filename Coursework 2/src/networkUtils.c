@@ -4,19 +4,6 @@
 #include "uthash.h"
 
 
-// Get node index by ID. Get hash of node and return
-// node index if found.
-int getNodeIndex(NetworkP network, int id) {
-  AdjListP node;
-  HASH_FIND_INT(network->nodesHashTable, &id, node);
-
-  if (node != NULL)
-    return node->index;
-  else
-    return -1;
-}
-
-
 // Get node by ID. Get hash of node and return
 // node if found.
 AdjListP getNode(NetworkP network, int id) {

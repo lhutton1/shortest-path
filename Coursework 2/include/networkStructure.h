@@ -1,6 +1,7 @@
 #ifndef __NETWORKSTRUCTURE__
 #define __NETWORKSTRUCTURE__
 
+#include <stdbool.h>
 #include "uthash.h"
 
 struct adjListNode {
@@ -12,14 +13,15 @@ struct adjListNode {
 typedef struct adjListNode AdjListNode, *AdjListNodeP;
 
 struct adjList {
-  int noMembers;
-  int id;
-  int index;
-  double x;
-  double y;
-  double distance;
-  struct adjList *parent;
-  struct adjListNode *head;
+  int noMembers;                // records number of adjacent nodes to current node
+  int id;                       // id of node
+  int index;                    // index of node in the adjacency list
+  double x;                     // x position of node on map
+  double y;                     // y position of node on map
+  double distance;              // distance of node from start node
+  bool path;                    // is node part of a path?
+  struct adjList *parent;       // parent node - djikstras
+  struct adjListNode *head;     // head of linked adjacency list
 
   UT_hash_handle hh; /* Make structure hashable */
 };

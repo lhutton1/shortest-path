@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include <math.h>
 
 #include "networkStructure.h"
@@ -62,6 +63,7 @@ void constructPath(NetworkP network, AdjListP currentNode, AdjListP end, AdjList
   printf("-----PATH-----\n");
   while (currentNode != start) {
     printf("%d\n", currentNode->id);
+    currentNode->path = true;
     currentNode = currentNode->parent;
   }
   printf("--------------\n");
