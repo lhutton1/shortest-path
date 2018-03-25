@@ -41,7 +41,7 @@ void parseLine(NetworkP network, char *line, bool findNode) {
   double weight;
 
   if (findNode == true && strncmp(line, "<node ", 6) == 0) {
-    sscanf(line, "%*s id=%d lat=%lf lon=%lf", &id, &lat, &lon);
+    sscanf(line, "%*s id=%d lat=%lf lon=%lf", &id, &lon, &lat);
     addNode(network, id, lat, lon);
   } else if (findNode == false && strncmp(line, "<link ", 6) == 0) {
     sscanf(line, "%*s id=%d node=%d node=%d %*s length=%lf", &id, &source, &target, &weight);

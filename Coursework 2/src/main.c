@@ -9,13 +9,17 @@
 #include "binaryHeap.h"
 #include "priorityQueue.h"
 #include "djikstrasAlgorithm.h"
+#include "writeNetwork.h"
 
 int main(void) {
+  printf("starting...\n");
   NetworkP n = createNetwork();
   readFile(n, "resources/Final_Map.map", true);   //pass1
   readFile(n, "resources/Final_Map.map", false);  //pass2
+  printf("read complete...\n");
 
-  djikstrasAlgorithm(n, 52728502, 31004231);
+  djikstrasAlgorithm(n, 247293164, -1851654833);
+  writeNetwork(n);
 
   destroyNetwork(n);
 
