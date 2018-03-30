@@ -133,6 +133,5 @@ void destroyHeap(HeapP heap) {
   for (int x = 0; x < heap->count - 1; x++) {
     free(heap->data[x]);
   }
-
   free(heap);
 }

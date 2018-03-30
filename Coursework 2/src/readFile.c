@@ -15,7 +15,7 @@ void readFile(NetworkP network, char *filePath, bool findNode) {
     FILE *file;
 
     if((file = fopen(filePath, "rb")) == NULL)
-        throwError("Error opening file, please chat the filepath provided");
+        throwError("Error opening file, please check the filepath provided");
 
     //begin to read file line by line and call parser
     char *line = malloc(MAX_LINE_SIZE);

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "uthash.h"
 #include "buildNetwork.h"
@@ -80,6 +81,7 @@ void addNode(NetworkP network, int id, double x, double y) {
   newNode->x = x;
   newNode->y = y;
   newNode->head = NULL;
+  newNode->path = false;
 
   HASH_ADD_INT(network->nodesHashTable, id, newNode);
 
