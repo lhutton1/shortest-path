@@ -25,6 +25,8 @@ void queuePush(HeapP heap, double priority, AdjListP data) {
 
   // push data onto heap
   heapPush(heap, dataTuple);
+
+  //free(dataTuple);
 }
 
 

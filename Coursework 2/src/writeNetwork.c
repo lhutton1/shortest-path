@@ -30,8 +30,6 @@ void writeEdge(FILE *fp, NetworkP network) {
     while (currentEdge != NULL) {
       adjacentNode = getNode(network, currentEdge->node);
 
-
-
       if (currentNode->path)
         color = "0xFF0000"; // red color for path lines
       else

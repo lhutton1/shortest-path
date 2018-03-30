@@ -5,6 +5,11 @@
 
 #include "networkStructure.h"
 #include "binaryHeap.h"
+#include "handleError.h"
+
+//TODO
+// - make throw error function
+// - find memeory leak
 
 
 // Create a new binary heap structure.
@@ -14,7 +19,7 @@ HeapP createHeap() {
   HeapP heap = (HeapP)malloc(sizeof(Heap));
 
   if (!heap)
-    printf("Unable to allocate memory for new heap\n");
+    throwError("Unable to allocate memory for new heap");
 
   heap->size = 4; //default size
   heap->count = 0;
@@ -125,6 +130,9 @@ void printHeap(HeapP heap) {
 
 // Destroy heap, freeing up all used memeory
 void destroyHeap(HeapP heap) {
-  free(heap->data);
+  for (int x = 0; x < heap->count - 1; x++) {
+    free(heap->data[x]);
+  }
+
   free(heap);
 }

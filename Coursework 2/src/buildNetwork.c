@@ -4,8 +4,7 @@
 #include "uthash.h"
 #include "buildNetwork.h"
 #include "networkStructure.h"
-
-const int MAX_NODES = 4000;
+#include "constants.h"
 
 // Add new adjacency node to the graph with specified id
 AdjListNodeP createAdjacencyNode(int nodeNo) {

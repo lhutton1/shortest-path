@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
 
@@ -10,6 +11,10 @@
 #include "priorityQueue.h"
 #include "djikstrasAlgorithm.h"
 #include "writeNetwork.h"
+#include "constants.h"
+
+const int MAX_NODES = 4000;
+const int MAX_LINE_SIZE = 1000;
 
 int main(void) {
   printf("starting...\n");

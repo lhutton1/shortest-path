@@ -5,9 +5,9 @@
 #include "uthash.h"
 
 struct adjListNode {
-  int node;
-  double weight;
-  struct adjListNode *next;
+  int node;                     // id of node
+  double weight;                // weight of path between adgacency item and current node
+  struct adjListNode *next;     // pointer to next adjacency item
 };
 
 typedef struct adjListNode AdjListNode, *AdjListNodeP;
@@ -15,7 +15,6 @@ typedef struct adjListNode AdjListNode, *AdjListNodeP;
 struct adjList {
   int noMembers;                // records number of adjacent nodes to current node
   int id;                       // id of node
-  int index;                    // index of node in the adjacency list
   double x;                     // x position of node on map
   double y;                     // y position of node on map
   double distance;              // distance of node from start node
@@ -29,9 +28,9 @@ struct adjList {
 typedef struct adjList AdjList, *AdjListP;
 
 struct network {
-  int noNodes;
-  AdjListP adjacencyListArray;
-  AdjListP nodesHashTable;
+  int noNodes;                  // number of nodes in the network
+  AdjListP adjacencyListArray;  // array of nodes
+  AdjListP nodesHashTable;      // hash table of nodes for quick access
 };
 
 typedef struct network Network, *NetworkP;

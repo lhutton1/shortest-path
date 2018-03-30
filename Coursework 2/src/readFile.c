@@ -5,12 +5,11 @@
 
 #include "buildNetwork.h"
 #include "readFile.h"
+#include "constants.h"
 
 
 // Open file and read line by line, limit line size to
 // maxLineSize preventing overflow
-const int MAX_LINE_SIZE = 1000;
-
 void readFile(NetworkP network, char *filePath, bool findNode) {
     FILE *file;
 
@@ -45,8 +44,6 @@ void parseLine(NetworkP network, char *line, bool findNode) {
     addNode(network, id, lat, lon);
   } else if (findNode == false && strncmp(line, "<link ", 6) == 0) {
     sscanf(line, "%*s id=%d node=%d node=%d %*s length=%lf", &id, &source, &target, &weight);
-    //printf("adding edge: %d, %d, %d, %lf\n", id, source, target, weight);
     addEdge(network, id, source, target, weight);
   }
-    //sscanf("", id, x, y);
 }
