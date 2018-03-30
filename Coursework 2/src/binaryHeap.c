@@ -9,6 +9,7 @@
 
 //TODO
 // - find memeory leak
+// - create heapify function!! faster run times
 
 
 // Create a new binary heap structure.

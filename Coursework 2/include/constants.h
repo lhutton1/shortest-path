@@ -6,5 +6,7 @@
 
 extern const int MAX_NODES;
 extern const int MAX_LINE_SIZE;
+extern const char *PATH_EDGE_COLOUR;
+extern const char *EDGE_COLOUR;
 
 #endif

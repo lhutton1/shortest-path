@@ -4,20 +4,18 @@
 #include "networkStructure.h"
 #include "networkUtils.h"
 #include "writeNetwork.h"
+#include "constants.h"
 
-// Write out the tree to file 'quad.out'
+
+// Write out the tree to file 'quad.out'. This function opens the file
+// and writes each edge to the file for gnuplot to read and consruct the
+// network.
 void writeNetwork(NetworkP network) {
   FILE *fp = fopen("out/network.out", "w");
-  writeEdge(fp, network);
-  fclose(fp);
-}
-
-void writeEdge(FILE *fp, NetworkP network) {
   AdjListP currentNode;
   AdjListP adjacentNode;
   AdjListNodeP currentEdge;
   AdjListNodeP adjacentEdge;
-  char *color;
 
   for (int i = 0; i < network->noNodes - 1; i++) {
     currentNode = &network->adjacencyListArray[i];
@@ -29,17 +27,23 @@ void writeEdge(FILE *fp, NetworkP network) {
 
     while (currentEdge != NULL) {
       adjacentNode = getNode(network, currentEdge->node);
-
-      if (currentNode->path)
-        color = "0xFF0000"; // red color for path lines
-      else
-        color = "0x0000FF"; // blue color for non path lines
-
-      fprintf(fp, "%g %g %s\n", currentNode->x, currentNode->y, color);
-      fprintf(fp, "%g %g %s\n", adjacentNode->x, adjacentNode->y, color);
-      fprintf(fp, "\n");
-
+      writeEdge(fp, network, currentNode, adjacentNode);
       currentEdge = currentEdge->next;
     }
   }
+  fclose(fp);
+}
+
+
+// Write a single edge to the gnuplot file
+void writeEdge(FILE *fp, NetworkP network, AdjListP currentNode, AdjListP adjacentNode) {
+  if (currentNode->path) {
+    fprintf(fp, "%g %g %s\n", currentNode->x, currentNode->y, PATH_EDGE_COLOUR);
+    fprintf(fp, "%g %g %s\n", adjacentNode->x, adjacentNode->y, PATH_EDGE_COLOUR);
+  } else {
+    fprintf(fp, "%g %g %s\n", currentNode->x, currentNode->y, EDGE_COLOUR);
+    fprintf(fp, "%g %g %s\n", adjacentNode->x, adjacentNode->y, EDGE_COLOUR);
+  }
+
+  fprintf(fp, "\n");
 }

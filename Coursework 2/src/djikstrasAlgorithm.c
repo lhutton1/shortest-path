@@ -9,7 +9,8 @@
 #include "djikstrasAlgorithm.h"
 #include "handleError.h"
 
-
+// Djikstras algorithm calculates the shortest path between
+// two nodes on the network.
 void djikstrasAlgorithm(NetworkP network, int startID, int endID) {
   PriorityQueue pq = createPQueue();
   AdjListP start = getNode(network, startID);
@@ -31,6 +32,7 @@ void djikstrasAlgorithm(NetworkP network, int startID, int endID) {
     if (currentNode == end) break;
     currentEdge = currentNode->head;
 
+    // Loop through adjacent nodes
     while (currentEdge != NULL) {
       nextNode = getNode(network, currentEdge->node);
 
@@ -42,23 +44,24 @@ void djikstrasAlgorithm(NetworkP network, int startID, int endID) {
       currentEdge = currentEdge->next;
     }
   }
-  constructPath(network, currentNode, end, start);
+  constructPath(network, end, start);
   destroyPQueue(pq);
 }
 
+// Before djikstras algorithm can start all nodes must have a
+// distance of infinity except the start node. 'INFINITY' is a constant
+// defined in 'math.h'.
 void resetNodes(NetworkP network) {
-  for (int x = 0; x < network->noNodes - 1; x++) {
+  for (int x = 0; x < network->noNodes - 1; x++)
     network->adjacencyListArray[x].distance = INFINITY;
-    network->adjacencyListArray[x].parent = NULL;
-  }
 }
 
-void constructPath(NetworkP network, AdjListP currentNode, AdjListP end, AdjListP start) {
-  double pathDist = 0;
+// Construct a path after running the initial algorithm.
+// A path is created using each nodes parent.
+void constructPath(NetworkP network, AdjListP end, AdjListP start) {
+  AdjListP currentNode = end;
 
-  currentNode = end;
-  pathDist = currentNode->distance;
-  printf("Path Distance: %lf\n", pathDist);
+  printf("Path Distance: %lf\n", currentNode->distance);
   printf("-----PATH-----\n");
   while (currentNode != start) {
     printf("%d\n", currentNode->id);
@@ -68,6 +71,7 @@ void constructPath(NetworkP network, AdjListP currentNode, AdjListP end, AdjList
   printf("--------------\n");
 }
 
+// Add all nodes to the queue using heapify.
 void nodesToQueue(NetworkP network, PriorityQueue pq, AdjListP currentNode) {
   for (int x = 0; x < network->noNodes - 1; x++) {
     currentNode = &network->adjacencyListArray[x];

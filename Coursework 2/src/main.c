@@ -14,6 +14,8 @@
 
 const int MAX_NODES = 4000;
 const int MAX_LINE_SIZE = 1000;
+const char *PATH_EDGE_COLOUR = "0xFF0000";
+const char *EDGE_COLOUR = "0x0000FF";
 
 int main(void) {
   printf("starting...\n");
