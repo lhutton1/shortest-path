@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include <stdio.h>
 
 // Small function to handle errors.
 // Prints error message and exits program,

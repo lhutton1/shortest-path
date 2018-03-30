@@ -8,7 +8,6 @@
 #include "handleError.h"
 
 //TODO
-// - make throw error function
 // - find memeory leak
 
 
@@ -26,7 +25,7 @@ HeapP createHeap() {
   heap->data = malloc(sizeof(NetworkTuple) * heap->size);
 
   if (!heap->data)
-    printf("Unable to allocate memory for new heap data\n");
+    throwError("Unable to allocate memory for new heap data");
 
   return heap;
 }
@@ -44,7 +43,7 @@ void heapPush(HeapP heap, NetworkTupleP newItem) {
     heap->data = realloc(heap->data, sizeof(NetworkTuple) * heap->size);
 
     if (!heap)
-      printf("Unable to allocate more memory for heap data\n");
+      throwError("Unable to allocate more memory for heap data");
   }
 
   itemIndex = heap->count++;
@@ -78,7 +77,7 @@ NetworkTupleP heapPop(HeapP heap) {
     heap->data = realloc(heap->data, sizeof(NetworkTuple) * heap->size);
 
     if (!heap->data)
-      printf("Unable to reallocate less memory for heap data\n");
+      throwError("Unable to reallocate less memory for heap data");
   }
 
   heapifyDown(heap, 0);

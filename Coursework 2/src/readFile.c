@@ -6,6 +6,7 @@
 #include "buildNetwork.h"
 #include "readFile.h"
 #include "constants.h"
+#include "handleError.h"
 
 
 // Open file and read line by line, limit line size to
@@ -13,10 +14,8 @@
 void readFile(NetworkP network, char *filePath, bool findNode) {
     FILE *file;
 
-    if((file = fopen(filePath, "rb")) == NULL) {
-        fprintf(stderr, "Error opening file: %s\n", filePath);
-        return;
-    }
+    if((file = fopen(filePath, "rb")) == NULL)
+        throwError("Error opening file, please chat the filepath provided");
 
     //begin to read file line by line and call parser
     char *line = malloc(MAX_LINE_SIZE);

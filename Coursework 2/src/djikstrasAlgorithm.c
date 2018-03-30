@@ -7,6 +7,7 @@
 #include "networkUtils.h"
 #include "priorityQueue.h"
 #include "djikstrasAlgorithm.h"
+#include "handleError.h"
 
 
 void djikstrasAlgorithm(NetworkP network, int startID, int endID) {
@@ -17,10 +18,8 @@ void djikstrasAlgorithm(NetworkP network, int startID, int endID) {
   AdjListP nextNode;
   AdjListNodeP currentEdge;
 
-  if (startID == endID) {
-    printf("Start node cannot be the same as the end node\n");
-    return;
-  }
+  if (startID == endID)
+    throwError("Start node cannot be the same as the end node");
 
   resetNodes(network);
   start->distance = 0;

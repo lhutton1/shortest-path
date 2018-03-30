@@ -5,15 +5,15 @@
 #include "buildNetwork.h"
 #include "networkStructure.h"
 #include "constants.h"
+#include "handleError.h"
+
 
 // Add new adjacency node to the graph with specified id
 AdjListNodeP createAdjacencyNode(int nodeNo) {
   AdjListNodeP newNode = (AdjListNodeP)malloc(sizeof(AdjListNode));
 
-  if (!newNode) {
-    printf("New node could not be created, unable to allocate needed memory");
-    return NULL;
-  }
+  if (!newNode)
+    throwError("New node could not be created, unable to allocate needed memory");
 
   newNode->node = nodeNo;
 
@@ -25,19 +25,15 @@ AdjListNodeP createAdjacencyNode(int nodeNo) {
 NetworkP createNetwork() {
   NetworkP newNetwork = (NetworkP)malloc(sizeof(Network));
 
-  if (!newNetwork) {
-    printf("New network could not be created, unable to allocate needed memory");
-    return NULL;
-  }
+  if (!newNetwork)
+    throwError("New network could not be created, unable to allocate needed memory");
 
   newNetwork->noNodes = 0;
   newNetwork->adjacencyListArray = (AdjListP)malloc(MAX_NODES * sizeof(AdjList));
   newNetwork->nodesHashTable = NULL;
 
-  if (!newNetwork->adjacencyListArray) {
-    printf("New adjacency lisy array could not be created, unable to allocate needed memory");
-    return NULL;
-  }
+  if (!newNetwork->adjacencyListArray)
+    throwError("New adjacency lisy array could not be created, unable to allocate needed memory");
 
   for (int x = 0; x < MAX_NODES; ++x) {
     newNetwork->adjacencyListArray[x].head = NULL;
@@ -73,10 +69,8 @@ void destroyNetwork(NetworkP network) {
 // adjacency node. Also add this node to a hash table so it can
 // be quickly found.
 void addNode(NetworkP network, int id, double x, double y) {
-  if (network->noNodes > MAX_NODES) {
-    printf("Limit reached\n");
-    return;
-  }
+  if (network->noNodes > MAX_NODES)
+    throwError("Node limit reached - Please run the program again with fewer nodes");
 
   AdjListP newNode = &network->adjacencyListArray[network->noNodes];
 
@@ -99,7 +93,7 @@ AdjListNodeP createNode(AdjListP node, double weight) {
     AdjListNodeP newAdjNode = (AdjListNodeP)malloc(sizeof(AdjListNode));
 
     if(!newAdjNode)
-        printf("Unable to allocate memory for new node\n");
+        throwError("Unable to allocate memory for new node");
 
     newAdjNode->node = node->id;
     newAdjNode->weight = weight;
