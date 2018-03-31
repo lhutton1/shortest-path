@@ -20,8 +20,7 @@ const char *EDGE_COLOUR = "0x0000FF";
 int main(void) {
   printf("starting...\n");
   NetworkP n = createNetwork();
-  readFile(n, "resources/Final_Map.map", true);   //pass1
-  readFile(n, "resources/Final_Map.map", false);  //pass2
+  readFile(n, "resources/Final_Map.map");
   printf("read complete...\n");
 
   djikstrasAlgorithm(n, 247293164, -1851654833);

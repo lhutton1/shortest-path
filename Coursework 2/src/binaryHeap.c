@@ -10,6 +10,7 @@
 //TODO
 // - find memeory leak
 // - create heapify function!! faster run times
+// - remove 2 pass method and create proper read file function
 
 
 // Create a new binary heap structure.

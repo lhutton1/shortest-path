@@ -9,6 +9,7 @@
 #include "djikstrasAlgorithm.h"
 #include "handleError.h"
 
+
 // Djikstras algorithm calculates the shortest path between
 // two nodes on the network.
 void djikstrasAlgorithm(NetworkP network, int startID, int endID) {
@@ -48,6 +49,7 @@ void djikstrasAlgorithm(NetworkP network, int startID, int endID) {
   destroyPQueue(pq);
 }
 
+
 // Before djikstras algorithm can start all nodes must have a
 // distance of infinity except the start node. 'INFINITY' is a constant
 // defined in 'math.h'.
@@ -55,6 +57,7 @@ void resetNodes(NetworkP network) {
   for (int x = 0; x < network->noNodes - 1; x++)
     network->adjacencyListArray[x].distance = INFINITY;
 }
+
 
 // Construct a path after running the initial algorithm.
 // A path is created using each nodes parent.
@@ -70,6 +73,7 @@ void constructPath(NetworkP network, AdjListP end, AdjListP start) {
   }
   printf("--------------\n");
 }
+
 
 // Add all nodes to the queue using heapify.
 void nodesToQueue(NetworkP network, PriorityQueue pq, AdjListP currentNode) {

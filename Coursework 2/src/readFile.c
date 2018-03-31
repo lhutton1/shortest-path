@@ -11,7 +11,7 @@
 
 // Open file and read line by line, limit line size to
 // maxLineSize preventing overflow
-void readFile(NetworkP network, char *filePath, bool findNode) {
+void readFile(NetworkP network, char *filePath) {
     FILE *file;
 
     if((file = fopen(filePath, "rb")) == NULL)
@@ -20,8 +20,15 @@ void readFile(NetworkP network, char *filePath, bool findNode) {
     //begin to read file line by line and call parser
     char *line = malloc(MAX_LINE_SIZE);
 
+    // add nodes
     while (fgets(line, MAX_LINE_SIZE, file) != NULL)
-        parseLine(network, line, findNode);
+        parseLine(network, line, true);
+
+    fseek(file, 0, SEEK_SET);
+
+    // add edges
+    while (fgets(line, MAX_LINE_SIZE, file) != NULL)
+        parseLine(network, line, false);
 
     free(line);
     fclose(file);
