@@ -10,13 +10,15 @@
 
 
 // Add new adjacency node to the graph with specified id
-AdjListNodeP createAdjacencyNode(int nodeNo) {
+AdjListNodeP createAdjacencyNode(AdjListP node, double weight) {
   AdjListNodeP newNode = (AdjListNodeP)malloc(sizeof(AdjListNode));
 
   if (!newNode)
     throwError("New node could not be created, unable to allocate needed memory");
 
-  newNode->node = nodeNo;
+  newNode->node = node->id;
+  newNode->weight = weight;
+  newNode->next = NULL;
 
   return newNode;
 }
@@ -34,7 +36,7 @@ NetworkP createNetwork() {
   newNetwork->nodesHashTable = NULL;
 
   if (!newNetwork->adjacencyListArray)
-    throwError("New adjacency lisy array could not be created, unable to allocate needed memory");
+    throwError("New adjacency list array could not be created, unable to allocate needed memory");
 
   for (int x = 0; x < MAX_NODES; ++x) {
     newNetwork->adjacencyListArray[x].head = NULL;
@@ -48,6 +50,8 @@ NetworkP createNetwork() {
 // Destroy graph, first removing adjacency nodes, then the adjacency array,
 // then the network itself freeing up all memory.
 void destroyNetwork(NetworkP network) {
+  AdjListP currentNode, temp;
+
   if (network) {
     if (network->adjacencyListArray) {
       for (int x = 0; x < network->noNodes; ++x) {
@@ -59,8 +63,12 @@ void destroyNetwork(NetworkP network) {
           free(temp);
         }
       }
-      free(network->adjacencyListArray);
     }
+
+    // delete and free all items in hash table
+    HASH_CLEAR(hh,network->nodesHashTable);
+
+    free(network->adjacencyListArray);
     free(network);
   }
 }
@@ -89,22 +97,6 @@ void addNode(NetworkP network, int id, double x, double y) {
 }
 
 
-// Create a new adjacent node to add to adjacency list
-// node and initialze default values.
-AdjListNodeP createNode(AdjListP node, double weight) {
-    AdjListNodeP newAdjNode = (AdjListNodeP)malloc(sizeof(AdjListNode));
-
-    if(!newAdjNode)
-        throwError("Unable to allocate memory for new node");
-
-    newAdjNode->node = node->id;
-    newAdjNode->weight = weight;
-    newAdjNode->next = NULL;
-
-    return newAdjNode;
-}
-
-
 // Add an edge to the network. Adds source node to the target in
 // adjacency array and visa versa, using a linked list to keep
 // track of changes.
@@ -116,13 +108,13 @@ void addEdge(NetworkP network, int id, int source, int target, double weight) {
   HASH_FIND_INT(network->nodesHashTable, &target, targetNode);
 
   // Add node to adjacency list for source -> target (source | target, ...)
-  AdjListNodeP newAdjNode = createNode(targetNode, weight);
+  AdjListNodeP newAdjNode = createAdjacencyNode(targetNode, weight);
   newAdjNode->next = sourceNode->head;
   sourceNode->head = newAdjNode;
   sourceNode->noMembers++;
 
   // Add node to adjacency list for target -> source (target | source, ...)
-  newAdjNode = createNode(sourceNode, weight);
+  newAdjNode = createAdjacencyNode(sourceNode, weight);
   newAdjNode->next = targetNode->head;
   targetNode->head = newAdjNode;
   targetNode->noMembers++;

@@ -18,28 +18,26 @@ HeapP createPQueue() {
 // the queue will then reorder the elements in the heap
 // to make sure the item at index 0 has the minimum priority
 void queuePush(HeapP heap, double priority, AdjListP data) {
-  NetworkTupleP dataTuple = (NetworkTupleP)malloc(sizeof(NetworkTuple));
+  NetworkTuple dataTuple;
 
-  dataTuple->priority = priority;
-  dataTuple->data = data;
+  dataTuple.priority = priority;
+  dataTuple.data = data;
 
   // push data onto heap
   heapPush(heap, dataTuple);
-
-  //free(dataTuple);
 }
 
 
 // Pop item with the lowest priority from the queue
 AdjListP queuePop(HeapP heap) {
-  return heapPop(heap)->data;
+  return heapPop(heap).data;
 }
 
 
 // Peek at the item with the lowest priority in the queue
 // but don't remove it.
 AdjListP queuePeek(HeapP heap) {
-  return heap->data[0]->data;
+  return heap->data[0].data;
 }
 
 
@@ -53,7 +51,7 @@ bool queueIsEmpty(HeapP heap) {
 void printQueue(HeapP heap) {
   printf("----Queue----\n");
   for (int x = 0; x < heap->count; x++)
-    printf("%d: (%lf, %p)\n", x, heap->data[x]->priority, heap->data[x]->data);
+    printf("%d: (%lf, %p)\n", x, heap->data[x].priority, heap->data[x].data);
   printf("-------------\n");
 }
 

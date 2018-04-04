@@ -3,7 +3,7 @@
 
 #include "networkStructure.h"
 
-AdjListNodeP createAdjacencyNode(int nodeNo);
+AdjListNodeP createAdjacencyNode(AdjListP node, double weight);
 NetworkP createNetwork();
 void addNode(NetworkP network, int id, double x, double y);
 void destroyNetwork(NetworkP network);

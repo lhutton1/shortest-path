@@ -11,14 +11,14 @@ typedef struct networkTuple NetworkTuple, *NetworkTupleP;
 struct heap {
   int size;
   int count;
-  NetworkTupleP *data;
+  NetworkTuple *data;
 };
 
 typedef struct heap Heap, *HeapP;
 
 HeapP createHeap();
-void heapPush(HeapP heap, NetworkTupleP item);
-NetworkTupleP heapPop(HeapP heap);
+void heapPush(HeapP heap, NetworkTuple item);
+NetworkTuple heapPop(HeapP heap);
 void destroyHeap(HeapP heap);
 void heapifyDown(HeapP heap, int i);
 void heapSwap(HeapP heap, int *x, int *y);
