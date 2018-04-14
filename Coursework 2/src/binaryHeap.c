@@ -7,9 +7,6 @@
 #include "binaryHeap.h"
 #include "handleError.h"
 
-//TODO
-// - create heapify function!! faster run times
-
 
 // Create a new binary heap structure.
 // This structure guarantees the value at index 0 to be the

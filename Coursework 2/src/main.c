@@ -22,6 +22,7 @@ int main(void) {
   readFile(n, "resources/Final_Map.map");
 
   djikstrasAlgorithm(n, 247293164, -1851654833);
+  printf("Writing network...\n");
   writeNetwork(n);
 
   destroyNetwork(n);
