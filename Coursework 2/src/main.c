@@ -1,6 +1,5 @@
 #include <stdio.h>
-#include <stdbool.h>
-#include <math.h>
+#include <stdlib.h>
 
 #include "buildNetwork.h"
 #include "readFile.h"
@@ -17,14 +16,29 @@ const int MAX_LINE_SIZE = 1000;
 const char *PATH_EDGE_COLOUR = "0xFF0000";
 const char *EDGE_COLOUR = "0x0000FF";
 
-int main(void) {
+int main(int argc, char *argv[]) {
+  char *filePath;
+  int startID;
+  int endID;
+
+  if (argc <= 3) {
+    printf("Missing arguments: 'filePath, start node ID, end node ID'\n");
+    exit(1);
+  }
+
+  filePath = argv[1];
+  startID = atoi(argv[2]);
+  endID = atoi(argv[3]);
+
   NetworkP n = createNetwork();
-  readFile(n, "resources/Final_Map.map");
+  readFile(n, filePath);
 
-  djikstrasAlgorithm(n, -8847, 57620252);
+  djikstrasAlgorithm(n, startID, endID);
   writeNetwork(n);
-
   destroyNetwork(n);
+
+  // print spacer
+  printf("\n");
 
   return 0;
 }

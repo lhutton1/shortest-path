@@ -12,13 +12,19 @@
 
 // Djikstras algorithm calculates the shortest path between
 // two nodes on the network.
+// In this function we reverse the the start and end nodes.
+// this means that the path is output in the correct order,
+// i.e from start to finish.
 void djikstrasAlgorithm(NetworkP network, int startID, int endID) {
   PriorityQueue pq = createPQueue();
-  AdjListP start = getNode(network, startID);
-  AdjListP end = getNode(network, endID);
+  AdjListP start = getNode(network, endID);
+  AdjListP end = getNode(network, startID);
   AdjListP currentNode;
   AdjListP nextNode;
   AdjListNodeP currentEdge;
+
+  if (start == NULL)
+    throwError("Node ID could not be found, please ensure the node exists");
 
   if (startID == endID)
     throwError("Start node cannot be the same as the end node");
@@ -63,15 +69,16 @@ void resetNodes(NetworkP network) {
 // A path is created using each nodes parent.
 void constructPath(NetworkP network, AdjListP end, AdjListP start) {
   AdjListP currentNode = end;
-
-  printf("Path Distance: %lf\n", currentNode->distance);
-  printf("-----PATH-----\n");
+  printf("Path distance: %lf\n", currentNode->distance);
+  printf("---------PATH----------\n");
   while (currentNode != start) {
     printf("ID:%d, X:%lf, Y:%lf\n", currentNode->id, currentNode->x, currentNode->y);
     currentNode->path = true;
     currentNode = currentNode->parent;
   }
-  printf("--------------\n");
+  printf("ID:%d, X:%lf, Y:%lf\n", start->id, start->x, start->y);
+  start->path = true;
+  printf("-----------------------\n");
 }
 
 
