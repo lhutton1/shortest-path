@@ -10,6 +10,7 @@
 #include "djikstrasAlgorithm.h"
 #include "writeNetwork.h"
 #include "constants.h"
+#include "handleError.h"
 
 const int MAX_NODES = 4000;
 const int MAX_LINE_SIZE = 1000;
@@ -21,10 +22,8 @@ int main(int argc, char *argv[]) {
   int startID;
   int endID;
 
-  if (argc <= 3) {
-    printf("Missing arguments: 'filePath, start node ID, end node ID'\n");
-    exit(1);
-  }
+  if (argc <= 3)
+    throwError("Missing arguments 'filePath, start node ID, end node ID'");
 
   filePath = argv[1];
   startID = atoi(argv[2]);

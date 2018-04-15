@@ -60,7 +60,7 @@ void djikstrasAlgorithm(NetworkP network, int startID, int endID) {
 // distance of infinity except the start node. 'INFINITY' is a constant
 // defined in 'math.h'.
 void resetNodes(NetworkP network) {
-  for (int x = 0; x < network->noNodes - 1; x++)
+  for (int x = 0; x < network->noNodes; x++)
     network->adjacencyListArray[x].distance = INFINITY;
 }
 
@@ -74,7 +74,11 @@ void constructPath(NetworkP network, AdjListP end, AdjListP start) {
   while (currentNode != start) {
     printf("ID:%d, X:%lf, Y:%lf\n", currentNode->id, currentNode->x, currentNode->y);
     currentNode->path = true;
-    currentNode = currentNode->parent;
+
+    if (currentNode->parent)
+      currentNode = currentNode->parent;
+    else
+      throwError("Path cannot be completed because a node is disconnected from the network");
   }
   printf("ID:%d, X:%lf, Y:%lf\n", start->id, start->x, start->y);
   start->path = true;
@@ -84,7 +88,7 @@ void constructPath(NetworkP network, AdjListP end, AdjListP start) {
 
 // Add all nodes to the queue using heapify.
 void nodesToQueue(NetworkP network, PriorityQueue pq, AdjListP currentNode) {
-  for (int x = 0; x < network->noNodes - 1; x++) {
+  for (int x = 0; x < network->noNodes; x++) {
     currentNode = &network->adjacencyListArray[x];
     queuePush(pq, currentNode->distance, currentNode);
   }
