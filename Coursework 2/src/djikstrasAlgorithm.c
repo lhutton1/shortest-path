@@ -67,7 +67,7 @@ void constructPath(NetworkP network, AdjListP end, AdjListP start) {
   printf("Path Distance: %lf\n", currentNode->distance);
   printf("-----PATH-----\n");
   while (currentNode != start) {
-    printf("%d\n", currentNode->id);
+    printf("ID:%d, X:%lf, Y:%lf\n", currentNode->id, currentNode->x, currentNode->y);
     currentNode->path = true;
     currentNode = currentNode->parent;
   }
