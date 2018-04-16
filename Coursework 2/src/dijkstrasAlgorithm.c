@@ -6,7 +6,7 @@
 #include "networkStructure.h"
 #include "networkUtils.h"
 #include "priorityQueue.h"
-#include "djikstrasAlgorithm.h"
+#include "dijkstrasAlgorithm.h"
 #include "handleError.h"
 
 
@@ -15,7 +15,7 @@
 // In this function we reverse the the start and end nodes.
 // this means that the path is output in the correct order,
 // i.e from start to finish.
-void djikstrasAlgorithm(NetworkP network, int startID, int endID) {
+void dijkstrasAlgorithm(NetworkP network, int startID, int endID) {
   PriorityQueue pq = createPQueue();
   AdjListP start = getNode(network, endID);
   AdjListP end = getNode(network, startID);

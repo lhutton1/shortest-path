@@ -7,7 +7,7 @@
 #include "networkUtils.h"
 #include "binaryHeap.h"
 #include "priorityQueue.h"
-#include "djikstrasAlgorithm.h"
+#include "dijkstrasAlgorithm.h"
 #include "writeNetwork.h"
 #include "constants.h"
 #include "handleError.h"
@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
   NetworkP n = createNetwork();
   readFile(n, filePath);
 
-  djikstrasAlgorithm(n, startID, endID);
+  dijkstrasAlgorithm(n, startID, endID);
   writeNetwork(n);
   destroyNetwork(n);
 
