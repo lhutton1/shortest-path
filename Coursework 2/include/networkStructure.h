@@ -17,7 +17,7 @@ struct adjList {
   int id;                       // id of node
   double x;                     // x position of node on map
   double y;                     // y position of node on map
-  double distance;              // distance of node from start node
+  double distance;                // distance of node from start node
   bool path;                    // is node part of a path?
   struct adjList *parent;       // parent node - djikstras
   struct adjListNode *head;     // head of linked adjacency list
