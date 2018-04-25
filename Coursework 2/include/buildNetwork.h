@@ -9,5 +9,4 @@ void addNode(NetworkP network, int id, double x, double y);
 void destroyNetwork(NetworkP network);
 void addEdge(NetworkP network, int id, int source, int target, double weight);
 
-
 #endif

@@ -16,6 +16,9 @@ AdjListNodeP createAdjacencyNode(AdjListP node, double weight) {
   if (!newNode)
     throwError("New node could not be created, unable to allocate needed memory");
 
+  if (weight < 0)
+    throwError("Edge weight cannot be less than 0");
+
   newNode->node = node->id;
   newNode->weight = weight;
   newNode->next = NULL;
