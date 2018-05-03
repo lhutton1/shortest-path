@@ -38,11 +38,11 @@ void writeNetwork(NetworkP network) {
 // Write a single edge to the gnuplot file
 void writeEdge(FILE *fp, NetworkP network, AdjListP currentNode, AdjListP adjacentNode) {
   if (currentNode->path && adjacentNode->path) {
-    fprintf(fp, "%g %g %s\n", currentNode->x, currentNode->y, PATH_EDGE_COLOUR);
-    fprintf(fp, "%g %g %s\n", adjacentNode->x, adjacentNode->y, PATH_EDGE_COLOUR);
+    fprintf(fp, "%lf %lf %s\n", currentNode->x, currentNode->y, PATH_EDGE_COLOUR);
+    fprintf(fp, "%lf %lf %s\n", adjacentNode->x, adjacentNode->y, PATH_EDGE_COLOUR);
   } else {
-    fprintf(fp, "%g %g %s\n", currentNode->x, currentNode->y, EDGE_COLOUR);
-    fprintf(fp, "%g %g %s\n", adjacentNode->x, adjacentNode->y, EDGE_COLOUR);
+    fprintf(fp, "%lf %lf %s\n", currentNode->x, currentNode->y, EDGE_COLOUR);
+    fprintf(fp, "%lf %lf %s\n", adjacentNode->x, adjacentNode->y, EDGE_COLOUR);
   }
   fprintf(fp, "\n");
 }

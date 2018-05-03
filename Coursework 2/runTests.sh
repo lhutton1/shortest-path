@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # remove all existing images in test folder
 rm -f test/*.png
 
